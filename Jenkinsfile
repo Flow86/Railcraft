@@ -31,10 +31,10 @@ catchError() {
             stage("Build") {
                 sh """set -x
                       chmod +x ./gradlew
-                      ./gradlew build -x test
+                      ./gradlew build release -x test
                    """
 
-                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true, onlyIfSuccessful: true
+                archiveArtifacts artifacts: 'build/libs/*.jar,build/dist/*.jar,build/dist/*.zip', fingerprint: true, onlyIfSuccessful: true
             }
             
             milestone label: 'Build complete'
